@@ -180,6 +180,9 @@ class vector {
 	  return Iterator(_data + n);
 	}
 
+	// -> operator
+	T *operator->() { return _data; }
+
 
 
 	/**

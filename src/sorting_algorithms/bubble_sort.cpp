@@ -9,7 +9,16 @@
 
 namespace adt {
 
-
+template<typename T>
+void bubble_sort(vector<T> &v, bool (*compare)(const T &a, const T &b)) {
+  for (u_int i = 0; i < v.size(); i++) {
+	for (u_int j = 0; j < v.size() - i - 1; j++) {
+	  if (compare(v[j + 1], v[j])) {
+		std::swap(v[j], v[j + 1]);
+	  }
+	}
+  }
+}
 
 }
 
