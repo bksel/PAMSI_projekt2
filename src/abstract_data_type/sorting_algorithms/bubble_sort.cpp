@@ -5,7 +5,7 @@
 #ifndef MINIPROJEKT1_SRC_SORTING_ALGORITHMS_BUBBLE_SORT_CPP_
 #define MINIPROJEKT1_SRC_SORTING_ALGORITHMS_BUBBLE_SORT_CPP_
 
-#include "../abstract_data_type/vector/vector.cpp"
+#include "../vector/vector.cpp"
 
 namespace adt {
 

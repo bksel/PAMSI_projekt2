@@ -32,8 +32,11 @@ add_executable(miniprojekt2
         src/data_reader/DataReader.cpp
         src/data_reader/DataReader.h
 
-        src/sorting_algorithms/bubble_sort.cpp
-        src/sorting_algorithms/bubble_sort.cpp
+        src/abstract_data_type/sorting_algorithms/bubble_sort.cpp
+        src/abstract_data_type/sorting_algorithms/bubble_sort.cpp
+        src/abstract_data_type/sorting_algorithms/merge_sort.cpp
+        src/abstract_data_type/lib.h
+        src/abstract_data_type/vector/print_inline.h
 
 
 )

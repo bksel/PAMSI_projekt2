@@ -3,9 +3,9 @@
 #include <vector>
 
 #include "src/data_reader/DataReader.h"
-#include "src/sorting_algorithms/bubble_sort.cpp"
+#include "src/abstract_data_type/lib.h"
 
-int main() {
+void test_loading() {
   std::cout << "Hello, World!" << std::endl;
 
   mdb::DataReader reader;
@@ -21,14 +21,33 @@ int main() {
   }
 
   adt::bubble_sort<mdb::MovieEntry>(testing.begin(),
-							   testing.end(),
-							   [](const mdb::MovieEntry &a, const mdb::MovieEntry &b)
-							   { return a.rating < b.rating; });
+									testing.end(),
+									[](const mdb::MovieEntry &a, const mdb::MovieEntry &b) {
+									  return a.rating < b.rating;
+									});
 
-  for (auto & it : testing) {
+  for (auto &it : testing) {
 	fmt::println("{}: {}", it.name, it.rating);
   }
 
+}
 
+void test_sorting() {
+
+  using adt::print_inline;
+
+  adt::vector<int> v{23, 45, 56, 454, 1, 4, -4, 8, 15, 90};
+
+  void (*sort)(adt::vector<int> &, bool (*)(const int &, const int &)) = adt::bubble_sort<int>;
+
+  print_inline(v);
+  sort(v, [](const int &a, const int &b) { return a > b; });
+  print_inline(v);
+
+}
+
+int main() {
+//  test_loading();
+  test_sorting();
   return 0;
 }
