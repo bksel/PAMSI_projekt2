@@ -20,7 +20,8 @@ int main() {
 	testing.push_back(*it);
   }
 
-  bubble_sort<mdb::MovieEntry>(testing,
+  adt::bubble_sort<mdb::MovieEntry>(testing.begin(),
+							   testing.end(),
 							   [](const mdb::MovieEntry &a, const mdb::MovieEntry &b)
 							   { return a.rating < b.rating; });
 

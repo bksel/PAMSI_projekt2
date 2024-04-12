@@ -20,6 +20,19 @@ void bubble_sort(vector<T> &v, bool (*compare)(const T &a, const T &b)) {
   }
 }
 
+template<typename T>
+void bubble_sort(typename vector<T>::Iterator begin,
+				 typename vector<T>::Iterator end,
+				 bool (*compare)(const T &a, const T &b)) {
+  for (auto i = begin; i != end; ++i) {
+	for (auto j = begin; j != end - 1; ++j) {
+	  if (compare(*(j + 1), *j)) {
+		std::swap(*j, *(j + 1));
+	  }
+	}
+  }
+}
+
 }
 
 #endif

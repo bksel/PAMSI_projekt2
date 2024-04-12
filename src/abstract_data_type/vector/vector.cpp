@@ -180,6 +180,10 @@ class vector {
 	  return Iterator(_data + n);
 	}
 
+	Iterator operator-(u_int n) const {
+	  return Iterator(_data - n);
+	}
+
 	// -> operator
 	T *operator->() { return _data; }
 
