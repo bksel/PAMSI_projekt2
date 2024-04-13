@@ -36,12 +36,19 @@ void test_sorting() {
 
   using adt::print_inline;
 
-  adt::vector<int> v{23, 45, 56, 454, 1, 4, -4, 8, 15, 90};
+  adt::vector<int> v{89,23, 45, 56, 454, 1, 4, -4, 8, 15, 91, -50, 0, 0, 0, 11, 23, 11, 45};
 
-  void (*sort)(adt::vector<int> &, bool (*)(const int &, const int &)) = adt::bubble_sort<int>;
+  void (*sort)(adt::Iterator<int> begin,
+			   adt::Iterator<int> end,
+			   adt::comparator<int> compare) = adt::bubble_sort<int>;
 
   print_inline(v);
-  sort(v, [](const int &a, const int &b) { return a > b; });
+  sort(v.begin(), v.end(), [](const int &a, const int &b) { return a < b; });
+  print_inline(v);
+
+  adt::vector<int> nv = adt::get_copy<int>(v.begin()+6, v.begin()+9);
+//  nv[0] = 1000;
+  print_inline(nv);
   print_inline(v);
 
 }

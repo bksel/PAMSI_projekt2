@@ -37,6 +37,8 @@ add_executable(miniprojekt2
         src/abstract_data_type/sorting_algorithms/merge_sort.cpp
         src/abstract_data_type/lib.h
         src/abstract_data_type/vector/print_inline.h
+        src/abstract_data_type/vector/copy.h
+        src/abstract_data_type/sorting_algorithms/sorting_utils.h
 
 
 )

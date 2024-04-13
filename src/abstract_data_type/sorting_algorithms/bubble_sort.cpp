@@ -6,24 +6,15 @@
 #define MINIPROJEKT1_SRC_SORTING_ALGORITHMS_BUBBLE_SORT_CPP_
 
 #include "../vector/vector.cpp"
+#include "sorting_utils.h"
 
 namespace adt {
 
 template<typename T>
-void bubble_sort(vector<T> &v, bool (*compare)(const T &a, const T &b)) {
-  for (u_int i = 0; i < v.size(); i++) {
-	for (u_int j = 0; j < v.size() - i - 1; j++) {
-	  if (compare(v[j + 1], v[j])) {
-		std::swap(v[j], v[j + 1]);
-	  }
-	}
-  }
-}
+void bubble_sort(Iterator<T> begin,
+				 Iterator<T> end,
+				 comparator<T> compare) {
 
-template<typename T>
-void bubble_sort(typename vector<T>::Iterator begin,
-				 typename vector<T>::Iterator end,
-				 bool (*compare)(const T &a, const T &b)) {
   for (auto i = begin; i != end; ++i) {
 	for (auto j = begin; j != end - 1; ++j) {
 	  if (compare(*(j + 1), *j)) {
@@ -31,6 +22,12 @@ void bubble_sort(typename vector<T>::Iterator begin,
 	  }
 	}
   }
+}
+
+template<typename T>
+void bubble_sort(vector<T> &v,
+				 comparator<T> compare) {
+  bubble_sort(v.begin(), v.end(), compare);
 }
 
 }
