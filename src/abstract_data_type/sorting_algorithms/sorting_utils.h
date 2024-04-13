@@ -10,12 +10,11 @@
 namespace adt {
 
 template<typename T>
-using comparator = bool (*)(const T &, const T &);
+using comparator = bool (*)(const T&, const T&);
 
 template<typename T>
 using Iterator = typename vector<T>::Iterator;
 
-
 } // namespace adt
 
-#endif //MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_SORTING_ALGORITHMS_SORTING_UTILS_H_
+#endif // MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_SORTING_ALGORITHMS_SORTING_UTILS_H_

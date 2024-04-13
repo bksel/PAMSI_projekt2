@@ -10,18 +10,20 @@
 
 namespace mdb {
 
-struct MovieEntry {
+struct MovieEntry
+{
 
   std::string name{};
   u_int rating = 0;
 
   MovieEntry() = default;
   MovieEntry(std::string name, u_int rating)
-	  : name(std::move(name))
-	  , rating(rating) {}
-
+    : name(std::move(name))
+    , rating(rating)
+  {
+  }
 };
 
 } // mdb
 
-#endif //MINIPROJEK2_SRC_ENTRY_H_
+#endif // MINIPROJEK2_SRC_ENTRY_H_

@@ -5,23 +5,24 @@
 #ifndef MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_
 #define MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_
 
-#include <iostream>
 #include "vector.cpp"
+#include <iostream>
 
 namespace adt {
 
 // Print the vector
 
 template<typename T>
-void print_inline(vector<T> &v) {
+void
+print_inline(vector<T>& v)
+{
   std::cout << "[";
   for (auto it = v.begin(); it != v.end(); ++it) {
-	std::cout << *it << ", ";
+    std::cout << *it << ", ";
   }
   std::cout << "]\n";
 }
 
 }
 
-
-#endif //MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_
+#endif // MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_

@@ -10,10 +10,13 @@
 
 namespace adt {
 
-class CopyIteratorException : public std::exception {
- public:
-  [[nodiscard]] const char *what() const noexcept override {
-	return "CopyIteratorException: left iterator is greater than right iterator.";
+class CopyIteratorException : public std::exception
+{
+public:
+  [[nodiscard]] const char* what() const noexcept override
+  {
+    return "CopyIteratorException: left iterator is greater than right "
+           "iterator.";
   }
 };
 
@@ -21,55 +24,57 @@ template<typename T>
 using Iterator = typename vector<T>::Iterator;
 
 template<typename T>
-void copy(Iterator<T> begin, Iterator<T> end, Iterator<T> dest) {
+void
+copy(Iterator<T> begin, Iterator<T> end, Iterator<T> dest)
+{
 
   if (begin.get_raw_pointer() > end.get_raw_pointer()) {
-	throw CopyIteratorException();
+    throw CopyIteratorException();
   }
 
   while (begin != end) {
-	if (dest == end) {
-	  break;
-	}
-	*dest = *begin;
-	++begin;
-	++dest;
-
+    if (dest == end) {
+      break;
+    }
+    *dest = *begin;
+    ++begin;
+    ++dest;
   }
-
-
-
 }
 
 template<typename T>
-void copy(Iterator<T> begin, Iterator<T> end, vector<T> &dest) {
+void
+copy(Iterator<T> begin, Iterator<T> end, vector<T>& dest)
+{
   dest.reserve(end - begin + 10);
   for (auto it = begin; it != end; ++it) {
-	dest.push_back(*it);
+    dest.push_back(*it);
   }
 }
 
 template<typename T>
-vector<T> get_copy(Iterator<T> begin, Iterator<T> end) {
+vector<T>
+get_copy(Iterator<T> begin, Iterator<T> end)
+{
 
   if (begin.get_raw_pointer() > end.get_raw_pointer()) {
-	throw CopyIteratorException();
+    throw CopyIteratorException();
   }
   vector<T> v{};
   v.reserve(end - begin + 10);
   for (auto it = begin; it != end; ++it) {
-	v.push_back(*it);
+    v.push_back(*it);
   }
   return v;
 }
 
 template<typename T>
-vector<T> get_copy(vector<T> &v) {
+vector<T>
+get_copy(vector<T>& v)
+{
   return get_copy<T>(v.begin(), v.end());
 }
 
-
-
 } // namespace adt
 
-#endif //MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_COPY_H_
+#endif // MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_COPY_H_
