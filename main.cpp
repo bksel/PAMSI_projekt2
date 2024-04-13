@@ -20,15 +20,16 @@ void test_loading() {
 	testing.push_back(*it);
   }
 
-  adt::bubble_sort<mdb::MovieEntry>(testing.begin(),
-									testing.end(),
+  fmt::println("Before sorting:");
+  adt::merge_sort<mdb::MovieEntry>(entries.begin(),
+									entries.end(),
 									[](const mdb::MovieEntry &a, const mdb::MovieEntry &b) {
 									  return a.rating < b.rating;
 									});
-
-  for (auto &it : testing) {
-	fmt::println("{}: {}", it.name, it.rating);
-  }
+  fmt::println("After sorting:");
+//  for (auto &it : entries) {
+//	fmt::println("{}: {}", it.name, it.rating);
+//  }
 
 }
 
@@ -54,7 +55,7 @@ void test_sorting() {
 }
 
 int main() {
-//  test_loading();
-  test_sorting();
+  test_loading();
+//  test_sorting();
   return 0;
 }

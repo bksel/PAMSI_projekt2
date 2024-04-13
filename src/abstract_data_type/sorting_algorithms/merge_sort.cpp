@@ -6,6 +6,9 @@
 #include "merge_sort.h"
 #include "bubble_sort.cpp"
 
+#include <thread>
+#include <future>
+
 namespace adt {
 
 template<typename T>
@@ -29,10 +32,13 @@ void merge_sort(typename vector<T>::Iterator begin, typename vector<T>::Iterator
   copy<T>(middle, end, *right);
 
 
+  std::future<std::unique_ptr<vector<T>>>
+	  left_future = std::async(std::launch::async, _merge_sort::split_and_sort<T>, std::ref(left), compare);
+  std::future<std::unique_ptr<vector<T>>>
+      right_future = std::async(std::launch::async, _merge_sort::split_and_sort<T>, std::ref(right), compare);
 
-  left = _merge_sort::split_and_sort(left, compare);
-
-  right = _merge_sort::split_and_sort(right, compare);
+  left = left_future.get();
+  right = right_future.get();
 
   _merge_sort::merge(begin, end, left, right, compare);
 
@@ -107,8 +113,7 @@ void merge(Iterator<T> target_begin,
 	  *it = *r;
 	  ++r;
 	  continue;
-	}
-	else if (r == r_end) {
+	} else if (r == r_end) {
 	  *it = *l;
 	  ++l;
 	  continue;
