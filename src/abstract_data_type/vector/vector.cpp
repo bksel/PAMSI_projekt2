@@ -29,7 +29,7 @@ class vector {
 
   // initializer list constructor
 
-  explicit vector(std::initializer_list<T> list);
+  vector(std::initializer_list<T> list);
 
   ~vector();
   vector(const vector &other);

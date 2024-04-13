@@ -34,8 +34,19 @@ void copy(Iterator<T> begin, Iterator<T> end, Iterator<T> dest) {
 	*dest = *begin;
 	++begin;
 	++dest;
+
   }
 
+
+
+}
+
+template<typename T>
+void copy(Iterator<T> begin, Iterator<T> end, vector<T> &dest) {
+  dest.reserve(end - begin + 10);
+  for (auto it = begin; it != end; ++it) {
+	dest.push_back(*it);
+  }
 }
 
 template<typename T>
