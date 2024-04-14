@@ -23,6 +23,15 @@ print_inline(vector<T>& v)
   std::cout << "]\n";
 }
 
+template<typename T>
+void
+print_inline(Iterator<T> begin, Iterator<T> end)
+{
+  std::cout << "[";
+  for (auto it = begin; it != end; ++it) {
+    std::cout << *it << ", ";
+  }
+  std::cout << "]\n";
 }
 
 #endif // MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_
