@@ -94,8 +94,18 @@ split_and_sort(std::unique_ptr<vector<T>>& v, comparator<T> compare)
   std::unique_ptr<vector<T>> right = std::make_unique<vector<T>>();
   copy<T>(middle, v->end(), *right);
 
-  left = split_and_sort(left, compare);
-  right = split_and_sort(right, compare);
+  if (v->size() > 10000) {
+    std::future<std::unique_ptr<vector<T>>> left_future = std::async(
+      std::launch::async, split_and_sort<T>, std::ref(left), compare);
+    std::future<std::unique_ptr<vector<T>>> right_future = std::async(
+      std::launch::async, split_and_sort<T>, std::ref(right), compare);
+
+    left = left_future.get();
+    right = right_future.get();
+  } else {
+    left = split_and_sort(left, compare);
+    right = split_and_sort(right, compare);
+  }
 
   merge(v->begin(), v->end(), left, right, compare);
   // left and right are lost

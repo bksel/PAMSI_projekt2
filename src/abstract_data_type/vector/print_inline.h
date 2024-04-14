@@ -34,4 +34,6 @@ print_inline(Iterator<T> begin, Iterator<T> end)
   std::cout << "]\n";
 }
 
+} // namespace adt
+
 #endif // MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_VECTOR_PRINT_INLINE_H_

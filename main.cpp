@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <vector>
 
@@ -23,13 +24,18 @@ test_loading()
   }
 
   fmt::println("Before sorting:");
+  auto start = std::chrono::high_resolution_clock::now();
   adt::merge_sort<mdb::MovieEntry>(
     entries.begin(),
     entries.end(),
     [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
       return a.rating < b.rating;
     });
+  auto end = std::chrono::high_resolution_clock::now();
   fmt::println("After sorting:");
+  fmt::println(
+    "Time: {}ms",
+    std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
   //  for (auto &it : entries) {
   //	fmt::println("{}: {}", it.name, it.rating);
   //  }
