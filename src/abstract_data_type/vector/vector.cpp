@@ -44,19 +44,59 @@ public:
   class Iterator
   {
     T* _data;
+    T* upper_bound = nullptr;
+    T* lower_bound = nullptr;
 
   public:
+    class OutOfBoundsException : public std::exception
+    {
+    public:
+      [[nodiscard]] const char* what() const noexcept override
+      {
+        return "OutOfBoundsException: The iterator is out of manually set "
+               "bounds.";
+      }
+    };
+
+    class NegativeMemoryAddressException : public std::exception
+    {
+    public:
+      [[nodiscard]] const char* what() const noexcept override
+      {
+        return "NegativeMemoryAddressException: operation would result in "
+               "negative memory address";
+      }
+    };
+
+    void set_constraints(Iterator lower, Iterator upper)
+    {
+      lower_bound = lower._data;
+      upper_bound = upper._data;
+    }
+
+    void remove_constraints()
+    {
+      lower_bound = nullptr;
+      upper_bound = nullptr;
+    }
+
     explicit Iterator(T* data)
       : _data(data)
     {
     }
     Iterator& operator++()
     {
+      if (upper_bound != nullptr && _data + 1 > upper_bound) {
+        throw OutOfBoundsException();
+      }
       _data++;
       return *this;
     }
     Iterator& operator--()
     {
+      if (lower_bound != nullptr && _data - 1 < lower_bound) {
+        throw OutOfBoundsException();
+      }
       _data--;
       return *this;
     }
@@ -65,13 +105,26 @@ public:
     u_int operator-(const Iterator& other)
     {
       if (_data < other._data) {
-        throw std::runtime_error("negative memory address");
+        throw NegativeMemoryAddressException();
       }
       return _data - other._data;
     }
-    Iterator operator+(u_int n) const { return Iterator(_data + n); }
+    Iterator operator+(u_int n) const
+    {
+      if (upper_bound != nullptr && _data + n > upper_bound) {
+        throw OutOfBoundsException();
+      }
 
-    Iterator operator-(u_int n) const { return Iterator(_data - n); }
+      return Iterator(_data + n);
+    }
+
+    Iterator operator-(u_int n) const
+    {
+      if (lower_bound != nullptr && _data - n < lower_bound) {
+        throw OutOfBoundsException();
+      }
+      return Iterator(_data - n);
+    }
 
     // -> operator
     T* operator->() { return _data; }
@@ -84,6 +137,20 @@ public:
     bool operator!=(const Iterator& other) const
     {
       return _data != other._data;
+    }
+
+    bool operator<(const Iterator& other) const { return _data < other._data; }
+
+    bool operator>(const Iterator& other) const { return _data > other._data; }
+
+    bool operator<=(const Iterator& other) const
+    {
+      return _data <= other._data;
+    }
+
+    bool operator>=(const Iterator& other) const
+    {
+      return _data >= other._data;
     }
   };
 
