@@ -42,6 +42,7 @@ add_executable(miniprojekt2
         src/abstract_data_type/vector/vector.h
         src/abstract_data_type/sorting_algorithms/merge_sort.h
         src/abstract_data_type/list/UnilateralList.h
+        src/abstract_data_type/sorting_algorithms/bucket_sort/BucketSort.h
 
 
 )

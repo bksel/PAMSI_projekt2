@@ -22,6 +22,13 @@ struct MovieEntry
     , rating(rating)
   {
   }
+
+  // operator << overload
+  friend std::ostream& operator<<(std::ostream& os, const MovieEntry& entry)
+  {
+    os << entry.rating;
+    return os;
+  }
 };
 
 } // mdb

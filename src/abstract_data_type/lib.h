@@ -8,3 +8,4 @@
 
 #include "sorting_algorithms/bubble_sort.cpp"
 #include "sorting_algorithms/merge_sort.cpp"
+#include "sorting_algorithms/bucket_sort/BucketSort.h"

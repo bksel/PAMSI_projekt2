@@ -17,6 +17,8 @@ test_loading()
 
   const adt::vector<mdb::MovieEntry>& entries = reader.get_entries();
 
+  fmt::println("Loaded {} entries", entries.size());
+
   adt::vector<mdb::MovieEntry> testing{};
   testing.reserve(1000 + 50);
   for (auto it = entries.begin(); it != entries.begin() + 1000; ++it) {
@@ -25,12 +27,15 @@ test_loading()
 
   fmt::println("Before sorting:");
   auto start = std::chrono::high_resolution_clock::now();
-  adt::merge_sort<mdb::MovieEntry>(
-    entries.begin(),
-    entries.end(),
-    [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
-      return a.rating < b.rating;
-    });
+//  adt::merge_sort<mdb::MovieEntry>(
+//    entries.begin(),
+//    entries.end(),
+//    [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
+//      return a.rating < b.rating;
+//    });
+
+    adt::bucket_sort<mdb::MovieEntry>(
+      entries, 10, [](const mdb::MovieEntry& entry) { return entry.rating; });
   auto end = std::chrono::high_resolution_clock::now();
   fmt::println("After sorting:");
   fmt::println(
@@ -39,6 +44,14 @@ test_loading()
   //  for (auto &it : entries) {
   //	fmt::println("{}: {}", it.name, it.rating);
   //  }
+
+  bool status = adt::is_sorted<mdb::MovieEntry>(
+    entries, [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
+      return a.rating < b.rating;
+    });
+
+  fmt::println("Sorted: {}", status);
+  adt::print_inline<mdb::MovieEntry>(entries.begin(), entries.begin() + 15);
 }
 
 void
@@ -62,6 +75,11 @@ test_sorting()
   //  nv[0] = 1000;
   print_inline(nv);
   print_inline(v);
+
+  bool status =
+    adt::is_sorted<int>(v, [](const int& a, const int& b) { return a < b; });
+  fmt::println("Sorted: {}", status);
+
 }
 
 void
@@ -83,8 +101,8 @@ test_list()
 int
 main()
 {
-  //  test_loading();
-  //  test_sorting();
-  test_list();
+  test_loading();
+//    test_sorting();
+  //  test_list();
   return 0;
 }
