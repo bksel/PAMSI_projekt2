@@ -4,5 +4,7 @@
 
 #include "vector/vector.h"
 
+#include "list/UnilateralList.h"
+
 #include "sorting_algorithms/bubble_sort.cpp"
 #include "sorting_algorithms/merge_sort.cpp"

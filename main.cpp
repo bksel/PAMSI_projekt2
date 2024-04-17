@@ -64,10 +64,27 @@ test_sorting()
   print_inline(v);
 }
 
+void
+test_list()
+{
+
+  adt::UnilateralList<int> list;
+
+  list.push(1);
+  list.push(2);
+  list.push(3);
+
+  while (not list.empty()) {
+
+    fmt::println("Popped: {}", list.pop());
+  }
+}
+
 int
 main()
 {
-  test_loading();
+  //  test_loading();
   //  test_sorting();
+  test_list();
   return 0;
 }
