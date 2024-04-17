@@ -24,13 +24,13 @@ generate_buckets(u_int N);
 
 template<typename T>
 void
-put_data_in_buckets(vector<T>& sequence,
+put_data_in_buckets(const vector<T>& sequence,
                     vector<UnilateralList<T>>& buckets,
                     hasher<T> hash);
 
 template<typename T>
 void
-load_sequence_from_buckets(vector<T>& sequence,
+load_sequence_from_buckets(const vector<T>& sequence,
                            vector<UnilateralList<T>>& buckets);
 
 } // _bucket_sort
@@ -61,8 +61,8 @@ bucket_sort(const vector<T>& sequence, u_int max, hasher<T> hash)
   using list = UnilateralList<T>;
 
   vector<list> buckets = generate_buckets<T>(max);
-  put_data_in_buckets(sequence, buckets, hash);
-  load_sequence_from_buckets(sequence, buckets); // sequence is now sorted
+  put_data_in_buckets<T>(sequence, buckets, hash);
+  load_sequence_from_buckets<T>(sequence, buckets); // sequence is now sorted
 }
 
 namespace _bucket_sort {
@@ -83,7 +83,7 @@ generate_buckets(u_int N)
 
 template<typename T>
 void
-put_data_in_buckets(vector<T>& sequence,
+put_data_in_buckets(const vector<T>& sequence,
                     vector<UnilateralList<T>>& buckets,
                     hasher<T> hash)
 {
@@ -95,7 +95,7 @@ put_data_in_buckets(vector<T>& sequence,
 
 template<typename T>
 void
-load_sequence_from_buckets(vector<T>& sequence,
+load_sequence_from_buckets(const vector<T>& sequence,
                            vector<UnilateralList<T>>& buckets)
 {
   u_int index = 0;
