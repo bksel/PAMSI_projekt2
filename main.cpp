@@ -18,6 +18,7 @@ test_loading()
   const adt::vector<mdb::MovieEntry>& entries = reader.get_entries();
 
   fmt::println("Loaded {} entries", entries.size());
+  std::this_thread::sleep_for(std::chrono::seconds(10));
 
   adt::vector<mdb::MovieEntry> testing{};
   testing.reserve(1000 + 50);
@@ -27,7 +28,7 @@ test_loading()
 
   fmt::println("Before sorting:");
   auto start = std::chrono::high_resolution_clock::now();
-  adt::merge_sort<mdb::MovieEntry>(
+  adt::merge_sort_parallel<mdb::MovieEntry>(
     entries.begin(),
     entries.end(),
     [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {

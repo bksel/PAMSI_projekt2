@@ -24,8 +24,8 @@ merge_sort(typename vector<T>::Iterator begin,
 template<typename T>
 void
 merge_sort_parallel(typename vector<T>::Iterator begin,
-           typename vector<T>::Iterator end,
-           comparator<T> compare);
+                    typename vector<T>::Iterator end,
+                    comparator<T> compare);
 
 namespace _merge_sort {
 
@@ -44,6 +44,12 @@ merge(Iterator<T> target_begin,
       std::unique_ptr<vector<T>>& left,
       std::unique_ptr<vector<T>>& right,
       comparator<T> compare);
+
+template<typename T>
+std::unique_ptr<vector<T>>
+go_one_deeper(std::unique_ptr<vector<T>>& v,
+              comparator<T> compare,
+              u_int allowed_threads);
 
 } // namespace __merge_sort
 
