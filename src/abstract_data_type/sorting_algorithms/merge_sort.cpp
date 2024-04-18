@@ -2,6 +2,9 @@
 // Created by ksel on 12/04/24.
 //
 
+#ifndef MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_SORTING_ALGORITHMS_MERGE_SORT_C_
+#define MINIPROJEKT2_SRC_ABSTRACT_DATA_TYPE_SORTING_ALGORITHMS_MERGE_SORT_C_
+
 #include "merge_sort.h"
 
 #include <future>
@@ -151,3 +154,5 @@ merge(Iterator<T> target_begin,
 } // namespace _merge_sort
 
 } // namespace adt
+
+#endif
