@@ -21,6 +21,12 @@ merge_sort(typename vector<T>::Iterator begin,
            typename vector<T>::Iterator end,
            comparator<T> compare);
 
+template<typename T>
+void
+merge_sort_parallel(typename vector<T>::Iterator begin,
+           typename vector<T>::Iterator end,
+           comparator<T> compare);
+
 namespace _merge_sort {
 
 /*

@@ -27,15 +27,15 @@ test_loading()
 
   fmt::println("Before sorting:");
   auto start = std::chrono::high_resolution_clock::now();
-//  adt::merge_sort<mdb::MovieEntry>(
-//    entries.begin(),
-//    entries.end(),
-//    [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
-//      return a.rating < b.rating;
-//    });
+  adt::merge_sort<mdb::MovieEntry>(
+    entries.begin(),
+    entries.end(),
+    [](const mdb::MovieEntry& a, const mdb::MovieEntry& b) {
+      return a.rating < b.rating;
+    });
 
-    adt::bucket_sort<mdb::MovieEntry>(
-      entries, 10, [](const mdb::MovieEntry& entry) { return entry.rating; });
+//    adt::bucket_sort<mdb::MovieEntry>(
+//      entries, 10, [](const mdb::MovieEntry& entry) { return entry.rating; });
   auto end = std::chrono::high_resolution_clock::now();
   fmt::println("After sorting:");
   fmt::println(
